@@ -128,7 +128,7 @@ void deletend(node*head){
 // }
 
 
-//To print/display the given Linked List..............................................
+//To print/display the given Linked List......................................................
 void printl(node *head)
 {
     while (head != NULL)
@@ -141,6 +141,17 @@ void printl(node *head)
 }
 
 
+//To take input directly from the terminal given by the user........................................
+node* take_input(){
+    int d;
+    cin>>d;
+    node*head = NULL;
+    while(d!=-1){
+        pushend(head,d);
+        cin>>d;
+    }
+    return head;
+}
 //To make cout<< work naturally for a linked list as well (operator << overloading)
 ostream& operator << (ostream&os, node*head){
     printl(head);
@@ -148,33 +159,36 @@ ostream& operator << (ostream&os, node*head){
 }
 
 //To make cin>> work naturally for a linked list as well (operator >> overloading)
-// istream& operator >> (istream&is, node*&head){
-//     head = takeinput();
-//     return is;
-// }
+istream& operator >> (istream&is, node*&head){
+    head = take_input();
+    return is;
+}
 
 
 //Driver program to run all the linked list functions..............................................
 int main()
 {
-    node *head = NULL;
-    pushfront(head, 5);
-    pushfront(head, 10);
-    pushfront(head, 2);
-    pushfront(head, 14);
-    cout<<length(head)<<endl;
-    printl(head);
-    pushmid(head, 21, 3);
-    printl(head);
-    pushmid(head, 19, 1);
-    printl(head);
-    pushend(head, 30);
-    cout<<head;
-    deletend(head);
-    cout<<head;
-    deletefront(head);
-    cout<<head;
-    deletemid(head, 2);
+    // node *head = NULL;
+    // pushfront(head, 5);
+    // pushfront(head, 10);
+    // pushfront(head, 2);
+    // pushfront(head, 14);
+    // cout<<length(head)<<endl;
+    // printl(head);
+    // pushmid(head, 21, 3);
+    // printl(head);
+    // pushmid(head, 19, 1);
+    // printl(head);
+    // pushend(head, 30);
+    // cout<<head;
+    // deletend(head);
+    // cout<<head;
+    // deletefront(head);
+    // cout<<head;
+    // deletemid(head, 2);
+    //node*head = take_input();
+    node*head;
+    cin>>head;
     cout<<head;
     return 0;    
 }
