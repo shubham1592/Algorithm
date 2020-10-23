@@ -152,17 +152,42 @@ node* take_input(){
     }
     return head;
 }
-//To make cout<< work naturally for a linked list as well (operator << overloading)
+
+
+//To make cout<< work naturally for a linked list as well (operator << overloading).................
 ostream& operator << (ostream&os, node*head){
     printl(head);
     return os;
 }
 
-//To make cin>> work naturally for a linked list as well (operator >> overloading)
+
+//To make cin>> work naturally for a linked list as well (operator >> overloading).................
 istream& operator >> (istream&is, node*&head){
     head = take_input();
     return is;
 }
+
+
+//To merge two given sorted linked lists and combine into a single one..............................
+node* merge(node* a, node* b){
+    if(a==NULL){
+        return b;
+    }
+    if(b==NULL){
+        return a;
+    }
+    node* c;
+    if(a->data<b->data){
+        c=a;
+        c->next=merge(a->next, b);
+    }
+    else{
+        c=b;
+        c->next=merge(a,b->next);
+    }
+    return c;
+}
+
 
 
 //Driver program to run all the linked list functions..............................................
@@ -187,8 +212,31 @@ int main()
     // cout<<head;
     // deletemid(head, 2);
     //node*head = take_input();
-    node*head;
-    cin>>head;
-    cout<<head;
+    // node *head = NULL;
+    // pushfront(head, 5);
+    // pushfront(head, 10);
+    // pushfront(head, 2);
+    // pushfront(head, 14);
+    // cout<<length(head)<<endl;
+    // printl(head);
+    // pushmid(head, 21, 3);
+    // printl(head);
+    // pushmid(head, 19, 1);
+    // printl(head);
+    // pushend(head, 30);
+    // cout<<head;
+    // deletend(head);
+    // cout<<head;
+    // deletefront(head);
+    // cout<<head;
+    // deletemid(head, 2);
+    //node*head = take_input();
+    cout<<endl;
+    node*head1;
+    node*head2;
+    cin>>head1;
+    cin>>head2;
+    cout<<merge(head1, head2)<<endl;
+    
     return 0;    
 }
