@@ -82,6 +82,52 @@ void pushmid(node *&head, int d, int p){
 }
 
 
+//To delete an element from the front.......................................................................
+void deletefront(node*&head){
+    if(head == NULL){
+        return;
+    }
+    node*temp = head->next;
+    delete head;
+    head = temp;
+    return;
+}
+
+
+//To delete an element from the end.........................................................................
+void deletend(node*head){
+    node*tempend = head;
+    while(tempend!=NULL){
+        tempend = tempend->next;
+    }
+    node*temp = head;
+    while(temp->next->next != NULL){
+        temp = temp->next;
+    }
+    delete tempend;
+    temp->next=NULL;
+    return;
+}
+
+
+// //To delete an element from middle...........................................................................
+// void deletemid(node*&head, int p){
+//     int jump = 1;
+//     node *temp = head;
+//     while (jump < p){
+//         temp = temp->next;
+//         jump++;
+//     }
+//     node *temp1 = head;
+//     while (jump <= p){
+//         temp1 = temp1->next;
+//         jump++;
+//     }
+//     temp->next = temp1->next;
+//     delete temp1;
+// }
+
+
 //To print/display the given Linked List..............................................
 void printl(node *head)
 {
@@ -93,6 +139,19 @@ void printl(node *head)
     cout<<endl;
     return;
 }
+
+
+//To make cout<< work naturally for a linked list as well (operator << overloading)
+ostream& operator << (ostream&os, node*head){
+    printl(head);
+    return os;
+}
+
+//To make cin>> work naturally for a linked list as well (operator >> overloading)
+// istream& operator >> (istream&is, node*&head){
+//     head = takeinput();
+//     return is;
+// }
 
 
 //Driver program to run all the linked list functions..............................................
@@ -110,7 +169,12 @@ int main()
     pushmid(head, 19, 1);
     printl(head);
     pushend(head, 30);
-    printl(head);
-
+    cout<<head;
+    deletend(head);
+    cout<<head;
+    deletefront(head);
+    cout<<head;
+    deletemid(head, 2);
+    cout<<head;
     return 0;    
 }
