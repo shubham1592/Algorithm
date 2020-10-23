@@ -7,7 +7,7 @@ using namespace std;
 // 3. pop() element ( (a)front (b)mid (c)end )
 // 4. printl() displays the linked list
 // 5. merge() combines two seperately sorted linked lists into one single sorted linked list
-
+// 6. And a lot of more functions that you can see in the following doc. 
 
 //Defining a common class for any Linked List along with a constructor..............................................
 class node
