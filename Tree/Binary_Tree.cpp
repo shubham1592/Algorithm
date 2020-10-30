@@ -25,20 +25,46 @@ node* build(){
     return root;
 }
 
-void print(node *root){
+void preorder_print(node*root){
     if (root == NULL)
     {
         return;
     }
     cout << root->data << " ";
-    print(root->left);
-    print(root->right);
+    preorder_print(root->left);
+    preorder_print(root->right);
+}
+
+void inorder_print(node*root){
+    if (root == NULL)
+    {
+        return;
+    }
+    inorder_print(root->left);
+    cout << root->data << " ";
+    inorder_print(root->right);
+}
+
+void postorder_print(node*root){
+    if (root == NULL)
+    {
+        return;
+    }
+    postorder_print(root->left);
+    postorder_print(root->right);
+    cout << root->data << " ";
 }
 
 int main(){
     node*root=build();
     cout << endl
          << "Preorder:  ";
-    print(root);
+    preorder_print(root);
+    cout << endl
+         << "Inorder:  ";
+    inorder_print(root);
+    cout << endl
+         << "Postorder:  ";
+    postorder_print(root);
     cout << endl;
 }
