@@ -1,0 +1,117 @@
+#include<iostream>
+using namespace std;
+
+class node{
+    public:
+        int data;
+        node *left;
+        node *right;
+        node(int d){
+            data = d;
+            left = NULL;
+            right = NULL;
+        }
+};
+
+node* build(){
+    int d;
+    cin >> d;
+    if(d==-1){
+        return NULL;
+    }
+    node *root = new node(d);
+    root->left = build();
+    root->right = build();
+    return root;
+}
+
+void preorder_print(node*root){
+    if (root == NULL)
+    {
+        return;
+    }
+    cout << root->data << " ";
+    preorder_print(root->left);
+    preorder_print(root->right);
+}
+
+void inorder_print(node*root){
+    if (root == NULL)
+    {
+        return;
+    }
+    inorder_print(root->left);
+    cout << root->data << " ";
+    inorder_print(root->right);
+}
+
+void postorder_print(node*root){
+    if (root == NULL)
+    {
+        return;
+    }
+    postorder_print(root->left);
+    postorder_print(root->right);
+    cout << root->data << " ";
+}
+
+int height(node*root){
+    if(root==NULL){
+        return 0;
+    }
+    int ls = height(root->left);
+    int rs = height(root->right);
+    return max(ls, rs) + 1;
+}
+
+void print_kth_level(node*root, int k){
+    if(root==NULL){
+        return;
+    }
+    if(k==1){
+        cout << root->data << " ";
+        return;
+    }
+    print_kth_level(root->left, k-1);
+    print_kth_level(root->right, k-1);
+    return;
+}
+
+void print_level_order(node*root){
+    int h = height(root);
+    for (int i = 1; i <= h; i++){
+        print_kth_level(root, i);
+        cout << endl;
+    }
+    return;
+}
+
+node* lca(node*root, int a, int b){
+    if(root == NULL){
+        return NULL;
+    }
+    if(root->data == a || root->data == b){
+        return root;
+    }
+    node *leftans = lca(root->left, a, b);
+    node *rightans = lca(root->right, a, b);
+    if(rightans != NULL && leftans != NULL){
+        return root;
+    }
+    if(leftans != NULL){
+        return leftans;
+    }
+    return rightans;
+}
+
+int main(){
+    node*root=build();
+    int a,b;
+    cin >> a >> b;
+    print_level_order(root);
+    cout << endl;
+    cout << "LCA of " << a << " and " << b << " is :" << endl;
+    cout << lca(root, a, b)->data;
+    
+    return 0;
+}
