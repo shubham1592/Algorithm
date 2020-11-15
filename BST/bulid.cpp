@@ -115,30 +115,28 @@ node* lca(node*root, int a, int b){
     return rightans;
 }
 
-int search(node*root, int key, int level){
-    if(root == NULL){
-        return -1;
+bool search(node*root, int data){
+    if(root==NULL){
+        return false;
     }
-    if(root->data == key){
-        return level;
+    if(data==root->data){
+        return true;
     }
-    int left = search(root->left, key, level + 1);
-    if(left != -1){
-        return left;
+    if(data<=root->data){
+        return search(root->left, data);
     }
-    return search(root->right, key, level + 1);
+    else{
+        return search(root->right, data);
+    }
+    
 }
 
-int shortest_distance(node*root, int a, int b){
-    node *lcanode = lca(root, a, b);
-    int p1 = search(lcanode, a, 0);
-    int p2 = search(lcanode, b, 0);
-    return p1 + p2;
-}
 
 int main(){
     node*root=build();
     print_level_order(root);
+    cout << endl
+         << search(root, 25);
 
     return 0;
 }
