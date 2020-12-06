@@ -40,6 +40,31 @@ class hashtable{
         return idx;
     }
 
+    void re_hash(){
+        node<T> **oldtable = table;
+        int oldtablesize = table_size;
+        table_size = 2 * table_size; //approximately find the next prime number
+        table = new node<T> *[table_size];
+        for (int i = 0; i < table_size; i++){
+            table[i] = NULL;
+        }
+        current_size = 0;
+
+        //Shift elements from old table to this new double sized table
+
+        for (int i = 0; i < oldtablesize; i++){
+            node<T> *temp = oldtable[i];
+            while(table!=NULL){
+                insert(temp->key, temp->value);
+                temp = temp->next;
+            }
+            if (oldtable[i] != NULL){
+                delete oldtable[i];
+            }
+        }
+        delete[] oldtable;
+    }
+
     public:
     hashtable(int ts=7){
         table_size = ts;
@@ -56,6 +81,12 @@ class hashtable{
         n->next = table[idx];
         table[idx] = n;
         current_size++;
+
+        // .............RE-HASHING.............
+        float load_factor = current_size / (1.0*table_size);
+        if(load_factor>0.7){
+            re_hash();
+        }
     }
 
     void print(){
