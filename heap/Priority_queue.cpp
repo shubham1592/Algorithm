@@ -5,13 +5,7 @@ using namespace std;
 
 int main(){
     
-    priority_queue<int> pq;
-
-    //default max heap
-    //to make min heap, add vector<int>,greater<int> inside <int>
-    //like this:-
-
-    //priority_queue<int, vector<int>,greater<int> > pq;
+    priority_queue<int, vector<int>,greater<int> > pq;
     
     int n;
     cin >> n;
